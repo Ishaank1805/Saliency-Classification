@@ -1,0 +1,46 @@
+# Comprehensive Requirements for LR Saliency Project
+# MENSA Scene Saliency Classification
+
+# Core scientific computing
+numpy==1.26.4
+pandas==2.2.2
+scipy>=1.11.0
+
+# Machine learning
+scikit-learn==1.5.1
+imbalanced-learn==0.12.4
+lightgbm==4.6.0
+
+# Deep learning (for BERT and neural features)
+torch==2.5.0
+transformers==4.46.3
+
+# NLP tools
+nltk==3.9.1
+datasets==3.1.0
+huggingface_hub>=0.20.0
+
+# Progress bars and utilities
+tqdm==4.66.4
+
+# Data handling
+pyarrow>=14.0.0
+fastparquet>=2023.10.0
+
+# NLP libraries (for advanced linguistic features)
+spacy>=3.0.0
+stanza>=1.4.0
+https://github.com/kpu/kenlm/archive/master.zip
+
+# Installation:
+# pip install -r requirements.txt
+
+# For conda environment:
+# conda create -n saliency python=3.10
+# conda activate saliency
+# pip install -r requirements.txt
+
+# Post-installation:
+# - Spacy model: python -m spacy download en_core_web_sm
+# - Stanza will auto-download English models on first use
+
