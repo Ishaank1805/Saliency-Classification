@@ -50,6 +50,9 @@ def permute_scenes(z, mask, ratio=0.10):
 
 
 class Trainer:
+    # HuggingFace repo for cached embeddings — change to your username
+    HF_CACHE_REPO = "Ishaank18/nadn-cache"
+
     def __init__(self, config: HNSDConfig):
         self.config = config
         self.device = torch.device(
@@ -62,6 +65,9 @@ class Trainer:
         self._embedding_cache_dir = config.cache_dir
         self._scene_cache = {}
         self._summary_cache = {}
+
+        # Auto-download embeddings from HF if local cache is empty
+        self._ensure_cache()
         print(f"Loading embeddings from cache: {self._embedding_cache_dir}")
 
         # Data
@@ -88,6 +94,31 @@ class Trainer:
         self.log_dir = config.log_dir
         os.makedirs(self.log_dir, exist_ok=True)
         self.history = {"phase1": [], "phase2": []}
+
+    def _ensure_cache(self):
+        """Auto-download embeddings from HuggingFace if local cache is empty."""
+        cache_dir = self._embedding_cache_dir
+        os.makedirs(cache_dir, exist_ok=True)
+
+        existing = [f for f in os.listdir(cache_dir) if f.endswith(".pt")]
+        if len(existing) >= 1800:  # 924 scenes + 924 summaries
+            print(f"  Cache OK: {len(existing)} files in {cache_dir}")
+            return
+
+        print(f"  Cache has only {len(existing)} files. Downloading from HuggingFace...")
+        try:
+            from huggingface_hub import snapshot_download
+            snapshot_download(
+                repo_id=self.HF_CACHE_REPO,
+                repo_type="dataset",
+                allow_patterns=["cache/scene_embeddings/*"],
+                local_dir=self.config.base_dir,
+            )
+            new_count = len([f for f in os.listdir(cache_dir) if f.endswith(".pt")])
+            print(f"  Downloaded {new_count} embedding files")
+        except Exception as e:
+            print(f"  WARNING: Auto-download failed: {e}")
+            print(f"  Run `python download_from_hf.py` manually, or `python encode_all.py` to re-encode.")
 
     def _safe_id(self, movie_id):
         return "".join(c if c.isalnum() or c in "_-" else "_" for c in movie_id)
@@ -311,8 +342,8 @@ class Trainer:
         print(f"Phase 2 complete. Best Val Macro F1: {best_f1:.2f}")
 
     @torch.no_grad()
-    def _evaluate(self, dataloader):
-        """Evaluate with summary embeddings."""
+    def _evaluate(self, dataloader, threshold=None):
+        """Evaluate with summary embeddings. If threshold=None, optimizes it on this data."""
         self.model.eval()
         all_logits = []
         all_labels = []
@@ -341,7 +372,8 @@ class Trainer:
         all_labels = np.concatenate(all_labels)
 
         from evaluate import find_optimal_threshold
-        threshold = find_optimal_threshold(all_logits, all_labels)
+        if threshold is None:
+            threshold = find_optimal_threshold(all_logits, all_labels)
         preds = (all_logits >= threshold).astype(int)
         metrics = compute_metrics(preds, all_labels)
         metrics["threshold"] = threshold
@@ -352,7 +384,13 @@ class Trainer:
         print("TEST SET EVALUATION")
         print("=" * 60)
 
-        test_metrics = self._evaluate(self.test_loader)
+        # Find threshold on VALIDATION set (no leakage)
+        val_metrics = self._evaluate(self.val_loader)
+        val_threshold = val_metrics["threshold"]
+        print(f"  Threshold (from val): {val_threshold:.3f}")
+
+        # Apply FIXED val threshold to test set
+        test_metrics = self._evaluate(self.test_loader, threshold=val_threshold)
         print(f"  Precision (salient): {test_metrics['precision_salient']:.2f}%")
         print(f"  Recall    (salient): {test_metrics['recall_salient']:.2f}%")
         print(f"  F1        (salient): {test_metrics['f1_salient']:.2f}%")

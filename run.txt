@@ -1,0 +1,89 @@
+ python train.py --mode train
+Device: cuda
+Loading embeddings from cache: /scratch/ishaan.karan/hnsd/cache/scene_embeddings
+Loading MENSA dataset...
+Repo card metadata block was not found. Setting CardData to empty.
+Repo card metadata block was not found. Setting CardData to empty.
+Repo card metadata block was not found. Setting CardData to empty.
+  Train: 824 movies
+  Val:   50 movies
+  Test:  50 movies
+/home2/ishaan.karan/miniconda3/envs/pyg/lib/python3.10/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+NADN trainable parameters: 42,963,087
+Mixed precision: ON
+Gradient accumulation: 2 steps
+
+============================================================
+PHASE 1: Narrative Arc Discovery
+============================================================
+  Epoch 1/30 | Loss: 3.4513 | Recon: 0.0551 | Divers: 0.2975 | Entropy: 0.1055 | Balance: 0.0186 | Order: 0.3317
+  Epoch 2/30 | Loss: 0.5422 | Recon: 0.0488 | Divers: 0.0271 | Entropy: 0.0261 | Balance: 0.0108 | Order: 0.3070
+  Epoch 3/30 | Loss: 0.4215 | Recon: 0.0421 | Divers: 0.0162 | Entropy: 0.0116 | Balance: 0.0153 | Order: 0.3073
+  Epoch 4/30 | Loss: 0.4748 | Recon: 0.0388 | Divers: 0.0170 | Entropy: 0.0152 | Balance: 0.0234 | Order: 0.3105
+  Epoch 5/30 | Loss: 0.3958 | Recon: 0.0372 | Divers: 0.0143 | Entropy: 0.0102 | Balance: 0.0149 | Order: 0.3194
+  Epoch 6/30 | Loss: 0.3322 | Recon: 0.0370 | Divers: 0.0113 | Entropy: 0.0073 | Balance: 0.0091 | Order: 0.3233
+  Epoch 7/30 | Loss: 0.2463 | Recon: 0.0366 | Divers: 0.0068 | Entropy: 0.0034 | Balance: 0.0034 | Order: 0.3073
+  Epoch 8/30 | Loss: 0.2130 | Recon: 0.0365 | Divers: 0.0049 | Entropy: 0.0015 | Balance: 0.0015 | Order: 0.3056
+  Epoch 9/30 | Loss: 0.1977 | Recon: 0.0364 | Divers: 0.0038 | Entropy: 0.0013 | Balance: 0.0011 | Order: 0.3003
+  Epoch 10/30 | Loss: 0.1863 | Recon: 0.0360 | Divers: 0.0029 | Entropy: 0.0010 | Balance: 0.0008 | Order: 0.2982
+  Epoch 11/30 | Loss: 0.1802 | Recon: 0.0360 | Divers: 0.0025 | Entropy: 0.0008 | Balance: 0.0006 | Order: 0.2979
+  Epoch 12/30 | Loss: 0.1748 | Recon: 0.0358 | Divers: 0.0021 | Entropy: 0.0007 | Balance: 0.0004 | Order: 0.2961
+  Epoch 13/30 | Loss: 0.1721 | Recon: 0.0358 | Divers: 0.0019 | Entropy: 0.0007 | Balance: 0.0005 | Order: 0.2939
+  Epoch 14/30 | Loss: 0.1698 | Recon: 0.0355 | Divers: 0.0017 | Entropy: 0.0007 | Balance: 0.0005 | Order: 0.2931
+  Epoch 15/30 | Loss: 0.1689 | Recon: 0.0355 | Divers: 0.0015 | Entropy: 0.0010 | Balance: 0.0007 | Order: 0.2920
+  Epoch 16/30 | Loss: 0.1650 | Recon: 0.0354 | Divers: 0.0013 | Entropy: 0.0010 | Balance: 0.0004 | Order: 0.2926
+  Epoch 17/30 | Loss: 0.1612 | Recon: 0.0352 | Divers: 0.0011 | Entropy: 0.0005 | Balance: 0.0002 | Order: 0.2909
+  Epoch 18/30 | Loss: 0.1602 | Recon: 0.0352 | Divers: 0.0010 | Entropy: 0.0006 | Balance: 0.0003 | Order: 0.2902
+  Epoch 19/30 | Loss: 0.1586 | Recon: 0.0352 | Divers: 0.0008 | Entropy: 0.0007 | Balance: 0.0003 | Order: 0.2892
+  Epoch 20/30 | Loss: 0.1583 | Recon: 0.0350 | Divers: 0.0008 | Entropy: 0.0007 | Balance: 0.0003 | Order: 0.2890
+  Epoch 21/30 | Loss: 0.1563 | Recon: 0.0349 | Divers: 0.0008 | Entropy: 0.0004 | Balance: 0.0001 | Order: 0.2887
+  Epoch 22/30 | Loss: 0.1546 | Recon: 0.0347 | Divers: 0.0006 | Entropy: 0.0004 | Balance: 0.0002 | Order: 0.2882
+  Epoch 23/30 | Loss: 0.1534 | Recon: 0.0346 | Divers: 0.0006 | Entropy: 0.0004 | Balance: 0.0001 | Order: 0.2870
+  Epoch 24/30 | Loss: 0.1519 | Recon: 0.0346 | Divers: 0.0006 | Entropy: 0.0004 | Balance: 0.0001 | Order: 0.2836
+  Epoch 25/30 | Loss: 0.1514 | Recon: 0.0345 | Divers: 0.0005 | Entropy: 0.0004 | Balance: 0.0001 | Order: 0.2829
+  Epoch 26/30 | Loss: 0.1564 | Recon: 0.0346 | Divers: 0.0006 | Entropy: 0.0011 | Balance: 0.0006 | Order: 0.2851
+  Epoch 27/30 | Loss: 0.1521 | Recon: 0.0346 | Divers: 0.0005 | Entropy: 0.0005 | Balance: 0.0002 | Order: 0.2840
+  Epoch 28/30 | Loss: 0.1507 | Recon: 0.0343 | Divers: 0.0005 | Entropy: 0.0003 | Balance: 0.0000 | Order: 0.2843
+  Epoch 29/30 | Loss: 0.1485 | Recon: 0.0343 | Divers: 0.0004 | Entropy: 0.0004 | Balance: 0.0001 | Order: 0.2794
+  Epoch 30/30 | Loss: 0.1483 | Recon: 0.0341 | Divers: 0.0003 | Entropy: 0.0003 | Balance: 0.0001 | Order: 0.2805
+Phase 1 complete. Checkpoint saved.
+
+============================================================
+PHASE 2: Saliency Fine-tuning
+============================================================
+  Epoch 1/20 | Loss: 0.2049 | Sal: 0.1916 | Recon: 0.0351 | Val P: 55.61 | Val R: 62.43 | Val F1: 58.82 | Val MacroF1: 67.83
+  Epoch 2/20 | Loss: 0.1967 | Sal: 0.1836 | Recon: 0.0345 | Val P: 57.81 | Val R: 58.26 | Val F1: 58.04 | Val MacroF1: 68.19
+  Epoch 3/20 | Loss: 0.1944 | Sal: 0.1813 | Recon: 0.0345 | Val P: 57.69 | Val R: 60.59 | Val F1: 59.11 | Val MacroF1: 68.66
+  Epoch 4/20 | Loss: 0.1937 | Sal: 0.1806 | Recon: 0.0344 | Val P: 57.80 | Val R: 60.05 | Val F1: 58.90 | Val MacroF1: 68.59
+  Epoch 5/20 | Loss: 0.1917 | Sal: 0.1786 | Recon: 0.0343 | Val P: 57.26 | Val R: 58.99 | Val F1: 58.12 | Val MacroF1: 68.07
+  Epoch 6/20 | Loss: 0.1903 | Sal: 0.1773 | Recon: 0.0343 | Val P: 57.81 | Val R: 59.08 | Val F1: 58.44 | Val MacroF1: 68.38
+  Epoch 7/20 | Loss: 0.1886 | Sal: 0.1754 | Recon: 0.0343 | Val P: 57.64 | Val R: 60.27 | Val F1: 58.93 | Val MacroF1: 68.56
+  Epoch 8/20 | Loss: 0.1871 | Sal: 0.1740 | Recon: 0.0343 | Val P: 56.68 | Val R: 61.37 | Val F1: 58.93 | Val MacroF1: 68.26
+  Early stopping at epoch 8
+Phase 2 complete. Best Val Macro F1: 68.66
+
+============================================================
+TEST SET EVALUATION
+============================================================
+  Precision (salient): 58.98%
+  Recall    (salient): 61.14%
+  F1        (salient): 60.04%
+  Macro F1:            69.29%
+
+============================================================
+INTERPRETABILITY ANALYSIS
+============================================================
+
+  Feature means (Salient vs Non-Salient):
+    Disruption Score         : Sal=0.7831  NonSal=0.7822  Δ=+0.0009
+    Arc 1 affinity           : Sal=0.1684  NonSal=0.1675  Δ=+0.0009
+    Arc 2 affinity           : Sal=0.1670  NonSal=0.1667  Δ=+0.0003
+    Arc 3 affinity           : Sal=0.1663  NonSal=0.1663  Δ=+0.0000
+    Arc 4 affinity           : Sal=0.1639  NonSal=0.1648  Δ=-0.0009
+    Arc 5 affinity           : Sal=0.1667  NonSal=0.1669  Δ=-0.0002
+    Arc 6 affinity           : Sal=0.1677  NonSal=0.1679  Δ=-0.0002
+    Arc Entropy              : Sal=1.7910  NonSal=1.7911  Δ=-0.0001
+  Saved interpretability data.
+
+Total training time: 0.2 hours
